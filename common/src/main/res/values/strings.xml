@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">common</string>
+    <string name="an_error_happened">An error happened, please retry !</string>
+</resources>

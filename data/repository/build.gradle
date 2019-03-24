@@ -1,0 +1,24 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply from: '../../android_commons.gradle'
+apply from: '../../repositories.gradle'
+apply from: '../../core_dependencies.gradle'
+apply from: '../../android_test_dependencies.gradle'
+apply from: '../../test_dependencies.gradle'
+
+android {
+    defaultConfig {
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
+}
+
+dependencies {
+    implementation project(":data:remote")
+    implementation project(":data:local")
+    api project(":data:model")
+    androidTestImplementation project(":common_test")
+}

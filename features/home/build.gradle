@@ -1,0 +1,26 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+apply plugin: "androidx.navigation.safeargs.kotlin"
+apply from: '../../repositories.gradle'
+apply from: '../../core_dependencies.gradle'
+apply from: '../../android_commons.gradle'
+
+android {
+    defaultConfig {
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    dataBinding {
+        enabled true
+    }
+}
+
+dependencies {
+    // COMMON module
+    api project(':common')
+    // NAVIGATION module
+    implementation project(':navigation')
+    // DATA module
+    implementation project(':data:repository')
+}

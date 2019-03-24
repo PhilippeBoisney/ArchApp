@@ -1,0 +1,23 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply from: '../repositories.gradle'
+apply from: '../core_dependencies.gradle'
+apply from: '../android_commons.gradle'
+
+android {
+    defaultConfig {
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+}
+
+dependencies {
+    // DATA modules
+    implementation project(':data:remote')
+    implementation project(':data:model')
+    implementation project(':data:repository')
+    implementation project(':data:local')
+    // FEATURE modules
+    implementation project(':features:home')
+    implementation project(':features:detail')
+}

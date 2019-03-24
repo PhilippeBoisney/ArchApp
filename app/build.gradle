@@ -1,0 +1,27 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply from: '../repositories.gradle'
+apply from: '../core_dependencies.gradle'
+apply from: '../test_dependencies.gradle'
+apply from: '../android_commons.gradle'
+
+android {
+    defaultConfig {
+        applicationId names.applicationId
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    dataBinding {
+        enabled true
+    }
+}
+
+dependencies {
+    // DI modules
+    implementation project(':di')
+    // FEATURES modules
+    implementation project(':features:home')
+    implementation project(':features:detail')
+    // NAVIGATION module
+    implementation project(':navigation')
+}

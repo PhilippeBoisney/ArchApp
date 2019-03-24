@@ -1,0 +1,14 @@
+dependencies {
+    // TEST
+    testImplementation "junit:junit:${versions.junit}"
+    // MOCK WEBSERVER
+    testImplementation "com.squareup.okhttp:mockwebserver:${versions.mockwebserver}"
+    // KOIN
+    testImplementation "org.koin:koin-test:${versions.koin}"
+    // MOCK
+    testImplementation "io.mockk:mockk:${versions.mockk}"
+    // ARCH
+    testImplementation "androidx.arch.core:core-testing:${versions.archCoreTest}"
+
+
+}
