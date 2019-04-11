@@ -1,14 +1,12 @@
 dependencies {
     // ANDROID TEST
-    androidTestImplementation "androidx.test:runner:${versions.androidTestRunner}"
-    androidTestImplementation "androidx.test.espresso:espresso-core:${versions.espressoCore}"
+    androidTestImplementation TestLibraries.androidTestRunner
+    androidTestImplementation TestLibraries.espresso
     // KOIN
-    androidTestImplementation "org.koin:koin-test:${versions.koin}"
+    androidTestImplementation TestLibraries.koin
     // ANDROID
-    androidTestImplementation "androidx.arch.core:core-testing:${versions.archCoreTest}"
-    androidTestImplementation "androidx.test.ext:junit:${versions.androidJunit}"
-    // MOCK WEBSERVER
-    androidTestImplementation "com.squareup.okhttp:mockwebserver:${versions.mockwebserver}"
+    androidTestImplementation TestLibraries.archCoreTest
+    androidTestImplementation TestLibraries.junit
     // MOCK
-    androidTestImplementation "io.mockk:mockk-android:${versions.mockk}"
+    androidTestImplementation TestLibraries.mockk
 }

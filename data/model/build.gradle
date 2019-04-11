@@ -1,7 +1,6 @@
-apply plugin: 'java-library'
 apply plugin: 'kotlin'
-apply from: '../../repositories.gradle'
-apply from: '../../core_dependencies.gradle'
 
 dependencies {
+    implementation Libraries.gson
+    implementation Libraries.roomRunTime
 }

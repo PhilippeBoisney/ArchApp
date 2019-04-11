@@ -1,0 +1,29 @@
+/**
+ * Feature dependencies
+ */
+apply plugin: 'com.android.library'
+apply from: '../../android_core_dependencies.gradle'
+apply from: '../../android_commons.gradle'
+
+dependencies {
+    implementation project(Modules.common)
+    implementation project(Modules.commonTest)
+    implementation project(Modules.repository)
+    implementation project(Modules.navigation)
+    // KOIN (Because each feature has to handle its dependencies)
+    implementation Libraries.koin
+    implementation Libraries.koinViewModel
+    // TEST
+    androidTestImplementation TestLibraries.androidTestRunner
+    androidTestImplementation TestLibraries.junit
+    androidTestImplementation TestLibraries.mockkAndroid
+    androidTestImplementation TestLibraries.fragmentNav
+    androidTestImplementation TestLibraries.espresso
+    androidTestImplementation TestLibraries.espressoContrib
+    androidTestImplementation TestLibraries.koin
+    androidTestImplementation TestLibraries.archCoreTest
+    testImplementation TestLibraries.junit
+    testImplementation TestLibraries.mockk
+    testImplementation TestLibraries.archCoreTest
+    kaptAndroidTest TestLibraries.databinding
+}

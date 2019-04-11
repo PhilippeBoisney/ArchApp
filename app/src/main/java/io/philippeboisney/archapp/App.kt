@@ -1,7 +1,7 @@
 package io.philippeboisney.archapp
 
 import android.app.Application
-import io.philippeboisney.di.appComponent
+import io.philippeboisney.archapp.di.appComponent
 import org.koin.android.ext.android.startKoin
 
 open class App: Application() {

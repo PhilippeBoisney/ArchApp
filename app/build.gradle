@@ -1,14 +1,9 @@
 apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
-apply from: '../repositories.gradle'
-apply from: '../core_dependencies.gradle'
-apply from: '../test_dependencies.gradle'
 apply from: '../android_commons.gradle'
 
 android {
     defaultConfig {
-        applicationId names.applicationId
+        applicationId ApplicationId.id
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     dataBinding {
@@ -17,11 +12,22 @@ android {
 }
 
 dependencies {
-    // DI modules
-    implementation project(':di')
+    // COMMON
+    implementation project(Modules.common)
+    // DATA modules
+    implementation project(Modules.local)
+    implementation project(Modules.remote)
+    implementation project(Modules.repository)
     // FEATURES modules
-    implementation project(':features:home')
-    implementation project(':features:detail')
-    // NAVIGATION module
-    implementation project(':navigation')
+    implementation project(Modules.featureHome)
+    implementation project(Modules.featureDetail)
+    // NAVIGATION
+    implementation project(Modules.navigation)
+    // KOIN
+    implementation Libraries.koin
+    implementation Libraries.koinViewModel
+    // ANDROID
+    implementation AndroidLibraries.appCompat
+    implementation AndroidLibraries.navigation
+    implementation AndroidLibraries.navigationFrag
 }

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/nav_graph_detail_feature"
+            app:startDestination="@id/detailFragment">
+
+    <!-- Detail Fragment -->
+    <fragment android:id="@+id/detailFragment"
+              android:name="io.philippeboisney.detail.DetailFragment"
+              android:label="User's detail">
+        <argument android:name="login" app:argType="string"/>
+        <action android:id="@+id/action_detailFragment_to_imageDetailFragment"
+                app:destination="@id/imageDetailFragment"
+                app:enterAnim="@anim/nav_default_pop_enter_anim"
+                app:exitAnim="@anim/nav_default_pop_exit_anim"
+                app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+                app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
+    </fragment>
+
+    <!-- Image Detail Fragment -->
+    <fragment android:id="@+id/imageDetailFragment"
+              android:name="io.philippeboisney.detail.DetailImageFragment"
+              android:label="User's avatar">
+        <argument android:name="imageUrl" app:argType="string"/>
+    </fragment>
+
+</navigation>

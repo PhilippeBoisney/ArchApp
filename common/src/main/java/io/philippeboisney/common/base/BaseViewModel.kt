@@ -4,28 +4,23 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.navigation.NavDirections
-import io.philippeboisney.common.navigation.NavigationCommand
 import io.philippeboisney.common.utils.Event
+import io.philippeboisney.navigation.NavigationCommand
 
 abstract class BaseViewModel: ViewModel() {
 
     // FOR ERROR HANDLER
-    protected val snackbarError = MutableLiveData<Event<Int>>()
+    protected val _snackbarError = MutableLiveData<Event<Int>>()
+    val snackBarError: LiveData<Event<Int>> get() = _snackbarError
 
     // FOR NAVIGATION
-    private val navigationCommands = MutableLiveData<Event<NavigationCommand>>()
-
-    // PUBLIC LIVEDATA's ---
-    fun getSnackBarError(): LiveData<Event<Int>>
-            = snackbarError
-
-    fun getNavigationCommands(): LiveData<Event<NavigationCommand>>
-            = navigationCommands
+    private val _navigation = MutableLiveData<Event<NavigationCommand>>()
+    val navigation: LiveData<Event<NavigationCommand>> = _navigation
 
     /**
-     * TODO:
+     * Convenient method to handle navigation from a [ViewModel]
      */
      fun navigate(directions: NavDirections) {
-        navigationCommands.value = Event(NavigationCommand.To(directions))
+        _navigation.value = Event(NavigationCommand.To(directions))
     }
 }

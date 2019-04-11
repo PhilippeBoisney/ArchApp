@@ -1,28 +1,30 @@
 package io.philippeboisney.home
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MediatorLiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import io.philippeboisney.common.base.BaseViewModel
 import io.philippeboisney.common.utils.Event
+import io.philippeboisney.home.domain.GetTopUsersUseCase
 import io.philippeboisney.model.User
-import io.philippeboisney.repository.Resource
-import io.philippeboisney.repository.UserRepository
+import io.philippeboisney.repository.AppDispatchers
+import io.philippeboisney.repository.utils.Resource
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
-class HomeViewModel(private val repository: UserRepository) : BaseViewModel() {
-
-    // PRIVATE DATA ---
-    private val dataSources = MediatorLiveData<Resource<List<User>>>()
-    private var liveDataUsers: LiveData<Resource<List<User>>> = MutableLiveData()
+/**
+ * A simple [BaseViewModel] that provide the data and handle logic to communicate with the model
+ * for [HomeFragment].
+ */
+class HomeViewModel(private val getTopUsersUseCase: GetTopUsersUseCase,
+                    private val dispatchers: AppDispatchers) : BaseViewModel() {
 
     init {
         getUsers(false)
     }
 
-    // PUBLIC LIVEDATA ---
-    fun getUsers(): LiveData<Resource<List<User>>>
-            = dataSources
+    // FOR DATA
+    private val _users = MediatorLiveData<Resource<List<User>>>()
+    val users: LiveData<Resource<List<User>>> get() = _users
+    private var usersSource: LiveData<Resource<List<User>>> = MutableLiveData()
 
     // PUBLIC ACTIONS ---
     fun userClicksOnItem(user: User)
@@ -33,12 +35,12 @@ class HomeViewModel(private val repository: UserRepository) : BaseViewModel() {
 
     // ---
 
-    private fun getUsers(forceRefresh: Boolean) {
-        dataSources.removeSource(liveDataUsers) // We make sure there is only one source of livedata (allowing us properly refresh)
-        liveDataUsers = repository.getTopUsers(forceRefresh = forceRefresh, scope = viewModelScope)
-        dataSources.addSource(liveDataUsers) {
-            dataSources.value = it
-            if (it.status == Resource.Status.ERROR) snackbarError.value = Event(R.string.an_error_happened)
+    private fun getUsers(forceRefresh: Boolean) = viewModelScope.launch(dispatchers.main) {
+        _users.removeSource(usersSource) // We make sure there is only one source of livedata (allowing us properly refresh)
+        withContext(dispatchers.io) { usersSource = getTopUsersUseCase(forceRefresh = forceRefresh) }
+        _users.addSource(usersSource) {
+            _users.value = it
+            if (it.status == Resource.Status.ERROR) _snackbarError.value = Event(R.string.an_error_happened)
         }
     }
 }

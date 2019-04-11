@@ -4,18 +4,26 @@ import androidx.lifecycle.LiveData
 import io.philippeboisney.local.dao.UserDao
 import io.philippeboisney.model.ApiResult
 import io.philippeboisney.model.User
-import io.philippeboisney.remote.UserService
-import kotlinx.coroutines.CoroutineScope
+import io.philippeboisney.remote.UserDatasource
+import io.philippeboisney.repository.utils.NetworkBoundResource
+import io.philippeboisney.repository.utils.Resource
 import kotlinx.coroutines.Deferred
 
-class UserRepository(private val service: UserService,
-                     private val dao: UserDao) {
+interface UserRepository {
+    suspend fun getTopUsersWithCache(forceRefresh: Boolean = false): LiveData<Resource<List<User>>>
+    suspend fun getUserDetailWithCache(forceRefresh: Boolean = false, login: String): LiveData<Resource<User>>
+}
+
+class UserRepositoryImpl(private val datasource: UserDatasource,
+                         private val dao: UserDao): UserRepository {
 
     /**
-     * TODO:
+     * Suspended function that will get a list of top [User]
+     * whether in cache (SQLite) or via network (API).
+     * [NetworkBoundResource] is responsible to handle this behavior.
      */
-    fun getTopUsers(forceRefresh: Boolean = false, scope: CoroutineScope): LiveData<Resource<List<User>>> {
-        return object : NetworkBoundResource<List<User>, ApiResult<User>>(scope) {
+    override suspend fun getTopUsersWithCache(forceRefresh: Boolean): LiveData<Resource<List<User>>> {
+        return object : NetworkBoundResource<List<User>, ApiResult<User>>() {
 
             override fun processResponse(response: ApiResult<User>): List<User>
                     = response.items
@@ -26,20 +34,22 @@ class UserRepository(private val service: UserService,
             override fun shouldFetch(data: List<User>?): Boolean
                     = data == null || data.isEmpty() || forceRefresh
 
-            override fun loadFromDb(): LiveData<List<User>>
+            override suspend fun loadFromDb(): List<User>
                     = dao.getTopUsers()
 
             override fun createCallAsync(): Deferred<ApiResult<User>>
-                    = service.fetchTopUsersAsync()
+                    = datasource.fetchTopUsersAsync()
 
-        }.asLiveData()
+        }.build().asLiveData()
     }
 
     /**
-     * TODO:
+     * Suspended function that will get details of a [User]
+     * whether in cache (SQLite) or via network (API).
+     * [NetworkBoundResource] is responsible to handle this behavior.
      */
-    fun getUserDetail(forceRefresh: Boolean = false, login: String, scope: CoroutineScope): LiveData<Resource<User>> {
-        return object : NetworkBoundResource<User, User>(scope) {
+    override suspend fun getUserDetailWithCache(forceRefresh: Boolean, login: String): LiveData<Resource<User>> {
+        return object : NetworkBoundResource<User, User>() {
 
             override fun processResponse(response: User): User
                     = response
@@ -53,12 +63,12 @@ class UserRepository(private val service: UserService,
                     || data.name.isNullOrEmpty()
                     || forceRefresh
 
-            override fun loadFromDb(): LiveData<User>
+            override suspend fun loadFromDb(): User
                     = dao.getUser(login)
 
             override fun createCallAsync(): Deferred<User>
-                    = service.fetchUserDetailsAsync(login)
+                    = datasource.fetchUserDetailsAsync(login)
 
-        }.asLiveData()
+        }.build().asLiveData()
     }
 }

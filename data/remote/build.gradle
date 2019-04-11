@@ -1,9 +1,4 @@
 apply plugin: 'com.android.library'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
-apply from: '../../repositories.gradle'
-apply from: '../../core_dependencies.gradle'
-apply from: '../../test_dependencies.gradle'
 apply from: '../../android_commons.gradle'
 
 android {
@@ -13,7 +8,20 @@ android {
 }
 
 dependencies {
-    implementation project(":data:model")
-    testImplementation project(":di")
-    testImplementation project(":common_test")
+    // NETWORK
+    implementation Libraries.retrofitCoroutineAdapter
+    implementation Libraries.gson
+    implementation Libraries.retrofit
+    implementation Libraries.retrofitGsonConverter
+    implementation Libraries.httpLoggingInterceptor
+    // DATA MODULE
+    implementation project(Modules.model)
+    testImplementation project(Modules.commonTest)
+    // KOIN
+    implementation Libraries.koin
+    implementation Libraries.koinViewModel
+    // TEST
+    testImplementation TestLibraries.junit
+    testImplementation TestLibraries.koin
+    testImplementation TestLibraries.mockWebServer
 }

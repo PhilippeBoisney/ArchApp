@@ -1,18 +1,9 @@
 apply plugin: 'com.android.library'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
-apply plugin: 'kotlin-kapt'
-apply plugin: "androidx.navigation.safeargs.kotlin"
-apply from: '../repositories.gradle'
-apply from: '../core_dependencies.gradle'
 apply from: '../android_commons.gradle'
 
-android {
-    defaultConfig {
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-    }
-}
-
 dependencies {
-
+    implementation AndroidLibraries.appCompat
+    implementation AndroidLibraries.navigation
+    implementation AndroidLibraries.navigationFrag
+    implementation project(Modules.navigation)
 }

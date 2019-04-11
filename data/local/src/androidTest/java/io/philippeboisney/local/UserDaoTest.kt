@@ -1,6 +1,7 @@
 package io.philippeboisney.local
 
-import io.philippeboisney.common_test.extensions.blockingObserve
+import io.philippeboisney.common_test.datasets.UserDataset.DATE_REFRESH
+import io.philippeboisney.common_test.datasets.UserDataset.FAKE_USERS
 import io.philippeboisney.local.base.BaseTest
 import io.philippeboisney.model.User
 import kotlinx.coroutines.runBlocking
@@ -17,29 +18,29 @@ class UserDaoTest: BaseTest() {
     }
 
     @Test
-    fun getTopUsersFromDb(){
-        val users = database.userDao().getTopUsers().blockingObserve()!!
+    fun getTopUsersFromDb() = runBlocking {
+        val users = database.userDao().getTopUsers()
         assertEquals(3, users.size)
         compareTwoUsers(FAKE_USERS.first(), users.first())
     }
 
     @Test
-    fun getUser(){
-        val user = database.userDao().getUser(FAKE_USERS.first().login).blockingObserve()!!
+    fun getUser() = runBlocking {
+        val user = database.userDao().getUser(FAKE_USERS.first().login)
         compareTwoUsers(FAKE_USERS.first(), user)
     }
 
     @Test
     fun saveUser_DateMustChange() = runBlocking {
             database.userDao().save(FAKE_USERS.first())
-            val user = database.userDao().getUser(FAKE_USERS.first().login).blockingObserve()!!
+            val user = database.userDao().getUser(FAKE_USERS.first().login)
             assertNotEquals(DATE_REFRESH, user.lastRefreshed)
     }
 
     @Test
     fun saveUsers_DateMustChange() = runBlocking {
         database.userDao().save(FAKE_USERS)
-        val users = database.userDao().getTopUsers().blockingObserve()!!
+        val users = database.userDao().getTopUsers()
         assertNotEquals(DATE_REFRESH, users.first().lastRefreshed)
     }
 
@@ -59,14 +60,5 @@ class UserDaoTest: BaseTest() {
         runBlocking {
             database.userDao().save(FAKE_USERS)
         }
-    }
-
-    companion object {
-        val DATE_REFRESH: Date = GregorianCalendar(2018, 5, 12).time
-        val FAKE_USERS = listOf(
-            User(id="Id_1", login = "Login_1", avatarUrl = "AvatarUrl_1", blog = "Blog1", company = "Company1", lastRefreshed = DATE_REFRESH, name = "Name1"),
-            User(id="Id_2", login = "Login_2", avatarUrl = "AvatarUrl_2", blog = "Blog2", company = "Company2", lastRefreshed = DATE_REFRESH, name = "Name2"),
-            User(id="Id_3", login = "Login_3", avatarUrl = "AvatarUrl_3", blog = "Blog3", company = "Company3", lastRefreshed = DATE_REFRESH, name = "Name3")
-        )
     }
 }

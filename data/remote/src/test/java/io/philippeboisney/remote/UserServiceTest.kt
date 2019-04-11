@@ -1,9 +1,9 @@
 package io.philippeboisney.remote
 
-import io.philippeboisney.common_test.WebMockServerUtils.mockHttpResponse
+import io.philippeboisney.common_test.utils.WebMockServerUtils.mockHttpResponse
 import io.philippeboisney.remote.base.BaseTest
-import junit.framework.Assert.assertEquals
 import kotlinx.coroutines.runBlocking
+import org.junit.Assert.assertEquals
 import org.junit.Test
 import retrofit2.HttpException
 import java.net.HttpURLConnection

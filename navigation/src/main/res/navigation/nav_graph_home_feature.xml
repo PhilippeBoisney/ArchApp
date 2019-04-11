@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/nav_graph_home_feature"
+            app:startDestination="@id/homeFragment">
+
+    <!-- HOME FRAGMENT -->
+    <fragment android:id="@+id/homeFragment"
+              android:name="io.philippeboisney.home.HomeFragment"
+              android:label="ArchApp">
+
+        <!-- Go to Detail Fragment (Its graph is responsible to handle response) -->
+        <action android:id="@+id/action_homeFragment_to_detailFragment"
+                app:destination="@id/nav_graph_detail_feature"
+                app:enterAnim="@anim/nav_default_pop_enter_anim"
+                app:exitAnim="@anim/nav_default_pop_exit_anim"
+                app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+                app:popExitAnim="@anim/nav_default_pop_exit_anim">
+            <argument android:name="login" app:argType="string"/>
+        </action>
+
+    </fragment>
+
+    <include app:graph="@navigation/nav_graph_detail_feature"/>
+
+</navigation>

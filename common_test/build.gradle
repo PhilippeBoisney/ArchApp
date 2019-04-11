@@ -1,16 +1,14 @@
 apply plugin: 'com.android.library'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
-apply from: '../repositories.gradle'
-apply from: '../core_dependencies.gradle'
 apply from: '../android_commons.gradle'
 
-android {
-    defaultConfig {
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-    }
-}
-
 dependencies {
-    implementation "com.squareup.okhttp:mockwebserver:${versions.mockwebserver}"
+    implementation project(Modules.model)
+    implementation TestLibraries.mockWebServer
+    implementation AndroidLibraries.lifecycleExtensions
+    implementation TestLibraries.androidTestRunner
+    implementation TestLibraries.espresso
+    implementation Libraries.koin
+    implementation Libraries.koinViewModel
+    implementation AndroidLibraries.recyclerView
+    implementation TestLibraries.coroutine
 }

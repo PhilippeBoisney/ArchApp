@@ -1,0 +1,18 @@
+/**
+ * Shared dependencies between modules
+ */
+dependencies {
+    // KOTLIN
+    implementation AndroidLibraries.kotlin
+    implementation AndroidLibraries.kotlinCoroutineCore
+    implementation AndroidLibraries.kotlinCoroutineAndroid
+    // ANDROID
+    implementation AndroidLibraries.appCompat
+    implementation AndroidLibraries.coreKtx
+    implementation AndroidLibraries.constraintLayout
+    implementation AndroidLibraries.lifecycleViewModel
+    implementation AndroidLibraries.lifecycleExtensions
+    implementation AndroidLibraries.recyclerView
+    implementation AndroidLibraries.navigation
+    implementation AndroidLibraries.navigationFrag
+}

@@ -1,15 +1,13 @@
 package io.philippeboisney.remote.base
 
-import com.squareup.okhttp.mockwebserver.MockResponse
 import com.squareup.okhttp.mockwebserver.MockWebServer
-import io.philippeboisney.di.createRemoteModule
 import io.philippeboisney.remote.UserService
+import io.philippeboisney.remote.di.createRemoteModule
 import org.junit.After
 import org.junit.Before
 import org.koin.standalone.StandAloneContext
 import org.koin.standalone.inject
 import org.koin.test.KoinTest
-import java.io.File
 
 abstract class BaseTest: KoinTest {
 
