@@ -1,15 +1,6 @@
 apply plugin: 'com.android.library'
 apply from: '../../android_commons.gradle'
 
-android {
-    defaultConfig {
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-    }
-    testOptions {
-        unitTests.returnDefaultValues = true
-    }
-}
-
 dependencies {
     // MODULES
     implementation project(Modules.remote)
