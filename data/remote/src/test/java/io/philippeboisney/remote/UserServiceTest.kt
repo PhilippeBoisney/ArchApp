@@ -1,6 +1,5 @@
 package io.philippeboisney.remote
 
-import io.philippeboisney.common_test.utils.WebMockServerUtils.mockHttpResponse
 import io.philippeboisney.remote.base.BaseTest
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals

@@ -1,13 +1,8 @@
-apply plugin: 'com.android.library'
-apply from: '../../android_commons.gradle'
-
-android {
-    defaultConfig {
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-    }
-}
+apply plugin: 'kotlin'
 
 dependencies {
+    // KOTLIN
+    implementation KotlinLibraries.kotlin
     // NETWORK
     implementation Libraries.retrofitCoroutineAdapter
     implementation Libraries.gson
@@ -16,7 +11,6 @@ dependencies {
     implementation Libraries.httpLoggingInterceptor
     // DATA MODULE
     implementation project(Modules.model)
-    testImplementation project(Modules.commonTest)
     // KOIN
     implementation Libraries.koin
     implementation Libraries.koinViewModel
