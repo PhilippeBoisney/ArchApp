@@ -54,8 +54,8 @@ class DetailUnitTests {
 
         coEvery { getUserDetailUseCase(false, "fake") } returns events
 
-        viewModel.getUser().observeForever(observerResult)
-        viewModel.getIsLoading().observeForever(observerLoading)
+        viewModel.user.observeForever(observerResult)
+        viewModel.isLoading.observeForever(observerLoading)
         viewModel.loadDataWhenActivityStarts("fake")
 
         verify {
@@ -80,7 +80,7 @@ class DetailUnitTests {
         val result = Resource.success(FAKE_USERS.first())
         coEvery { getUserDetailUseCase(any(), "fake") } returns MutableLiveData<Resource<User>>().apply { value = result }
 
-        viewModel.getUser().observeForever(observer)
+        viewModel.user.observeForever(observer)
         viewModel.loadDataWhenActivityStarts("fake")
         viewModel.reloadDataWhenUserRefreshes()
 

@@ -1,6 +1,7 @@
 apply plugin: 'kotlin'
 
 dependencies {
+    implementation KotlinLibraries.kotlin
     implementation Libraries.gson
     implementation Libraries.roomRunTime
 }

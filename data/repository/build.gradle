@@ -16,7 +16,7 @@ dependencies {
     implementation project(Modules.local)
     api project(Modules.model)
     // ANDROID
-    implementation AndroidLibraries.kotlinCoroutineCore
+    implementation KotlinLibraries.kotlinCoroutineCore
     implementation AndroidLibraries.kotlinCoroutineAndroid
     implementation AndroidLibraries.lifecycleExtensions
     // KOIN

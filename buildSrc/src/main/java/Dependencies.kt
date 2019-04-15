@@ -76,10 +76,13 @@ object Libraries {
     val glide = "com.github.bumptech.glide:glide:${Versions.glide}"
 }
 
-object AndroidLibraries {
-    // KOTLIN
+object KotlinLibraries {
     val kotlin = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${Versions.kotlin}"
     val kotlinCoroutineCore = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.coroutines}"
+}
+
+object AndroidLibraries {
+    // KOTLIN
     val kotlinCoroutineAndroid = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutines}"
     // ANDROID
     val appCompat = "androidx.appcompat:appcompat:${Versions.appCompat}"

@@ -23,6 +23,8 @@ class DetailFragment : BaseFragment() {
     // FOR DATA
     private val viewModel: DetailViewModel by viewModel()
     private lateinit var binding: FragmentDetailBinding
+
+
     private val args: DetailFragmentArgs by navArgs()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -34,7 +36,10 @@ class DetailFragment : BaseFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
         viewModel.loadDataWhenActivityStarts(args.login)
+
+
     }
 
     override fun getViewModel(): BaseViewModel = viewModel

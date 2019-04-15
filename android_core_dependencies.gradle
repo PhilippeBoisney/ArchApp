@@ -3,8 +3,8 @@
  */
 dependencies {
     // KOTLIN
-    implementation AndroidLibraries.kotlin
-    implementation AndroidLibraries.kotlinCoroutineCore
+    implementation KotlinLibraries.kotlin
+    implementation KotlinLibraries.kotlinCoroutineCore
     implementation AndroidLibraries.kotlinCoroutineAndroid
     // ANDROID
     implementation AndroidLibraries.appCompat

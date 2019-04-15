@@ -23,6 +23,7 @@ dependencies {
     androidTestImplementation TestLibraries.espressoContrib
     androidTestImplementation TestLibraries.koin
     androidTestImplementation TestLibraries.archCoreTest
+    testImplementation TestLibraries.androidTestRunner
     testImplementation TestLibraries.junit
     testImplementation TestLibraries.mockk
     testImplementation TestLibraries.archCoreTest

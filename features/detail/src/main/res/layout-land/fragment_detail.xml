@@ -13,7 +13,7 @@
             android:id="@+id/fragment_detail_root_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:showWhenLoading="@{viewmodel.getIsLoading()}"
+            app:showWhenLoading="@{viewmodel.isLoading}"
             app:onRefreshListener="@{() -> viewmodel.reloadDataWhenUserRefreshes()}">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -45,8 +45,8 @@
                     android:layout_marginEnd="8dp"
                     android:clickable="true"
                     android:focusable="true"
-                    app:imageUrlRounded="@{viewmodel.getUser().avatarUrl}"
-                    android:onClick="@{() -> viewmodel.userClicksOnAvatarImage(viewmodel.getUser())}"
+                    app:imageUrlRounded="@{viewmodel.user.avatarUrl}"
+                    android:onClick="@{() -> viewmodel.userClicksOnAvatarImage(viewmodel.user)}"
                     android:transitionName="@string/transition_avatar_orig"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/imageView"
@@ -63,7 +63,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
                     android:textSize="18sp"
-                    android:text="@{viewmodel.getUser().name}"
+                    android:text="@{viewmodel.user.name}"
                     app:layout_constraintBottom_toBottomOf="@+id/imageView3"
                     app:layout_constraintStart_toEndOf="@+id/imageView3"
                     app:layout_constraintTop_toTopOf="@+id/imageView3"/>
@@ -97,7 +97,7 @@
                     android:layout_marginBottom="8dp"
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="8dp"
-                    android:text="@{viewmodel.getUser().company}"
+                    android:text="@{viewmodel.user.company}"
                     app:layout_constraintBottom_toBottomOf="@+id/imageView4"
                     app:layout_constraintStart_toEndOf="@+id/imageView4"
                     app:layout_constraintTop_toTopOf="@+id/imageView4"/>
@@ -118,7 +118,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
-                    android:text="@{viewmodel.getUser().blog}"
+                    android:text="@{viewmodel.user.blog}"
                     app:layout_constraintBottom_toBottomOf="@+id/imageView5"
                     app:layout_constraintStart_toEndOf="@+id/imageView5"
                     app:layout_constraintTop_toTopOf="@+id/imageView5"/>

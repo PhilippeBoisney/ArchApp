@@ -17,14 +17,14 @@ import kotlinx.coroutines.withContext
 class HomeViewModel(private val getTopUsersUseCase: GetTopUsersUseCase,
                     private val dispatchers: AppDispatchers) : BaseViewModel() {
 
-    init {
-        getUsers(false)
-    }
-
     // FOR DATA
     private val _users = MediatorLiveData<Resource<List<User>>>()
     val users: LiveData<Resource<List<User>>> get() = _users
     private var usersSource: LiveData<Resource<List<User>>> = MutableLiveData()
+
+    init {
+        getUsers(false)
+    }
 
     // PUBLIC ACTIONS ---
     fun userClicksOnItem(user: User)
