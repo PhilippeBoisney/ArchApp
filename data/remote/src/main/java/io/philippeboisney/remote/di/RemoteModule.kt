@@ -6,7 +6,7 @@ import io.philippeboisney.remote.UserService
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
-import org.koin.dsl.module.module
+import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -17,7 +17,7 @@ fun createRemoteModule(baseUrl: String) = module {
             .setLevel(HttpLoggingInterceptor.Level.HEADERS)
     }
 
-    factory { OkHttpClient.Builder().addInterceptor(get()).build() }
+    factory { OkHttpClient.Builder().addInterceptor(get() as Interceptor).build() }
 
     single {
         Retrofit.Builder()

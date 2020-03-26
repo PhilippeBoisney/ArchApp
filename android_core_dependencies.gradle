@@ -11,7 +11,6 @@ dependencies {
     implementation AndroidLibraries.coreKtx
     implementation AndroidLibraries.constraintLayout
     implementation AndroidLibraries.lifecycleViewModel
-    implementation AndroidLibraries.lifecycleExtensions
     implementation AndroidLibraries.recyclerView
     implementation AndroidLibraries.navigation
     implementation AndroidLibraries.navigationFrag

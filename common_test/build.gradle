@@ -3,7 +3,7 @@ apply from: '../android_commons.gradle'
 
 dependencies {
     implementation project(Modules.model)
-    implementation AndroidLibraries.lifecycleExtensions
+    implementation AndroidLibraries.lifecycleLiveData
     implementation TestLibraries.androidTestRunner
     implementation TestLibraries.espresso
     implementation Libraries.koin

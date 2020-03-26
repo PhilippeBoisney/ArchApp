@@ -13,7 +13,7 @@ dependencies {
     kapt Libraries.roomCompiler
     implementation Libraries.roomRunTime
     implementation Libraries.roomKtx
-    implementation AndroidLibraries.lifecycleExtensions
+    implementation AndroidLibraries.lifecycleLiveData
     // TEST MODULE
     androidTestImplementation project(Modules.commonTest)
     // DATA MODULE

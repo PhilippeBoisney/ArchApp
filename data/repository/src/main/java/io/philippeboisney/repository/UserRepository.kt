@@ -54,8 +54,8 @@ class UserRepositoryImpl(private val datasource: UserDatasource,
             override fun processResponse(response: User): User
                     = response
 
-            override suspend fun saveCallResults(item: User)
-                    = dao.save(item)
+            override suspend fun saveCallResults(items: User)
+                    = dao.save(items)
 
             override fun shouldFetch(data: User?): Boolean
                     = data == null
