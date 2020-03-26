@@ -4,6 +4,8 @@
 apply plugin: 'com.android.library'
 apply from: '../../android_core_dependencies.gradle'
 apply from: '../../android_commons.gradle'
+apply plugin: 'kotlin-kapt'
+apply plugin: "androidx.navigation.safeargs.kotlin"
 
 dependencies {
     implementation project(Modules.common)

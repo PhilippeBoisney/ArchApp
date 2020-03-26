@@ -10,7 +10,7 @@ import retrofit2.http.Query
 interface UserService {
 
     @GET("search/users")
-    fun fetchTopUsersAsync(@Query("q") query: String = "PhilippeB",
+    fun fetchTopUsersAsync(@Query("q") query: String = "hamedsilver",
                            @Query("sort") sort: String = "followers"): Deferred<ApiResult<User>>
 
     @GET("users/{login}")
